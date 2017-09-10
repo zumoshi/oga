@@ -520,6 +520,18 @@ even
     s(:call, 'not', arg)
   end
 
+  # Generates the AST for the `:has` selector.
+  #
+  # @param [AST::Node] arg
+  # @return [AST::Node]
+  def on_pseudo_class_has(arg)
+    if arg.type == :axis
+      s(:axis, 'descendant', arg.children[1])
+    elsif arg.type == :predicate
+      s(:predicate, s(:axis, 'descendant', s(:test, nil, "*")), arg.children[1])
+    end
+  end
+
   # Generates the AST for the `=` operator.
   #
   # @param [AST::Node] attr

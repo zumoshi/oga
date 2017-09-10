@@ -137,5 +137,16 @@ describe Oga::CSS::Lexer do
         [:T_RPAREN, nil]
       ])
     end
+
+    it 'lexes the :has(#foo) pseudo class' do
+      expect(lex_css(':has(#foo)')).to eq([
+        [:T_COLON, nil],
+        [:T_IDENT, 'has'],
+        [:T_LPAREN, nil],
+        [:T_HASH, nil],
+        [:T_IDENT, 'foo'],
+        [:T_RPAREN, nil]
+      ])
+    end
   end
 end
